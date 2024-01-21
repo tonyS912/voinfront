@@ -1,6 +1,6 @@
 <template>
     <div
-        class="card d-flex flex-center align-items-center"
+        class="card d-flex flex-center align-items-center justify-content-center rounded-4"
         :class=tille.classes
     >
         <div
