@@ -20,12 +20,16 @@ npm install
 
 ```sh
 npm run dev
+// or 
+vite
 ```
 
 ### Compile and Minify for Production
 
 ```sh
 npm run build
+// or
+vite build 
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
