@@ -1,20 +1,18 @@
 <template>
     <div
-        class="card d-flex flex-center align-items-center justify-content-center rounded-4"
-        :class=tille.classes
+        class="card d-flex flex-center align-items-center justify-content-center rounded-5"
+        :class="tille.classes"
     >
-        <div
-            class="d-flex align-items-center justify-content-center col-12 mx-sm-3">
+        <div class="d-flex align-items-center justify-content-center col-12 mx-sm-3">
             <div class="justify-content-center align-items-center d-flex">
                 <div>
-                    <img class="icon-sum tilies-hov icon-size-lg" :src=tille.img />
+                    <img class="icon-sum tilies-hov icon-size-lg" :src="tille.img" />
                 </div>
                 <span class="fs-5 text-hov"
                     ><b>{{ tille.count }}</b></span
                 >
             </div>
-            <div class="fs-5 text-center mx-4 text-hov"
-                :class=tille.text >
+            <div class="fs-5 text-center mx-4 text-hov" :class="tille.text">
                 {{ tille.title }}
             </div>
         </div>
@@ -25,7 +23,6 @@
 const props = defineProps({
     tille: Object
 })
-
 </script>
 
 <style lang="scss">

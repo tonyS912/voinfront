@@ -1,22 +1,35 @@
 <template>
-    <div class="d-flex flex-column container justify-content-center align-items-center col-10">
+    <div
+        class="container col-12 col-sm-10 d-flex flex-column justify-content-center align-items-center"
+    >
         <h1>Grüßbert, <b>Guest</b></h1>
 
-        <div class="overrides-row col-9 justify-content-between mb-5">
-            <div class="card overrides-row d-flex flex-center align-items-start justify-content-center col-8 bg-primary text-white rounded-4 big-size">
-                <div class="d-flex flex-nowrap flex-column align-items-center justify-content-center col-12 col-md-5">
+        <div class="column col-12 col-lg-9 justify-content-between mb-5">
+            <div
+                class="card col-12 col-lg-8 d-flex flex-center align-items-center justify-content-center bg-primary text-white rounded-5 p-3 my-3"
+            >
+                <div
+                    class="d-flex flex-nowrap flex-column align-items-center justify-content-center col-12 col-md-5"
+                >
                     <div class="justify-content-center align-items-center d-flex">
                         <div>
                             <img
                                 class="icon-sum tilies-hov icon-size-lg rounded-circle border-2 border border-white"
-                                src="./icons/Urgent.webp"/>
+                                src="./icons/Urgent.webp"
+                            />
                         </div>
                         <span class="fs-1 text-hov ms-3"><b>5</b></span>
                     </div>
                     <div class="fs-4 mt-3 text-center text-hov text-white">Task Urgent</div>
                 </div>
-                <div class="border-2 border border-white h-75 p-0 m-0" style="width: 1px;"></div>
-                <div class="col-md-6 fs-2">{{ currentDay }} <br> <span class="fs-4 fw-light">Upcomming Deadline</span></div>
+                <div class="d-flex align-self-center border-1 border border-white my-2 w-75"></div>
+                <div class="row col-12 col-md-6 m-0 text-center fs-2">
+                    <b>{{ currentDay }}</b>
+                    <br />
+                    <span class="d-flex justify-content-center fs-4 fw-light"
+                        >Upcomming Deadline</span
+                    >
+                </div>
             </div>
 
             <SmallTiles v-for="item in tilleList1" :tille="item" :key="item.id"></SmallTiles>
@@ -31,7 +44,9 @@
 import { ref } from 'vue'
 import SmallTiles from './SmallTiles.vue'
 
-const currentDay = ref(new Date().toLocaleDateString('iso',  { month: 'long', day: 'numeric', year: 'numeric' }))
+const currentDay = ref(
+    new Date().toLocaleDateString('iso', { month: 'long', day: 'numeric', year: 'numeric' })
+)
 
 const tilleList1 = ref([
     {
