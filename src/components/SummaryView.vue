@@ -1,10 +1,10 @@
 <template>
     <div
-        class="container col-12 col-sm-10 d-flex flex-column justify-content-center align-items-center"
+        class="container col-12 col-sm-10 d-flex flex-column justify-content-center align-items-center mb-6"
     >
         <h1>Grüßbert, <b>Guest</b></h1>
 
-        <div class="column col-12 col-lg-9 justify-content-between mb-5">
+        <div class="column col-12 col-lg-9 justify-content-between mb-3">
             <div
                 class="card col-12 col-lg-8 d-flex flex-center align-items-center justify-content-center bg-primary text-white rounded-5 p-3 my-3"
             >
@@ -34,7 +34,7 @@
 
             <SmallTiles v-for="item in tilleList1" :tille="item" :key="item.id"></SmallTiles>
         </div>
-        <div class="overrides-row col-9 justify-content-between">
+        <div class="overrides-row col-12 justify-content-between">
             <SmallTiles v-for="item in tilleList2" :tille="item" :key="item.id"></SmallTiles>
         </div>
     </div>
@@ -53,7 +53,7 @@ const tilleList1 = ref([
         id: 0,
         title: 'Task To-do',
         count: 18,
-        classes: 'col-3 small-size',
+        classes: 'mt-4',
         text: 'text-primary',
         img: '/src/components/icons/svg/todo_list.svg'
     }
@@ -64,7 +64,7 @@ const tilleList2 = ref([
         id: 0,
         title: 'Task in Board',
         count: 4,
-        classes: 'col-3 small-size',
+        classes: 'my-3 w-md-48',
         text: 'text-primary',
         img: '/src/components/icons/svg/board.svg'
     },
@@ -72,7 +72,7 @@ const tilleList2 = ref([
         id: 1,
         title: 'Task in Progress',
         count: 1,
-        classes: 'col-3 small-size',
+        classes: 'my-3 w-md-48',
         text: 'text-primary',
         img: '/src/components/icons/svg/in_progress.svg'
     },
@@ -80,7 +80,7 @@ const tilleList2 = ref([
         id: 2,
         title: 'Awaiting Feedback',
         count: 2,
-        classes: 'col-3 small-size',
+        classes: 'my-3 w-md-48',
         text: 'text-primary',
         img: '/src/components/icons/svg/awaiting_feedback.svg'
     },
@@ -88,7 +88,7 @@ const tilleList2 = ref([
         id: 3,
         title: 'Task Done',
         count: 9,
-        classes: 'col-3 small-size',
+        classes: 'my-3 w-md-48',
         text: 'text-primary',
         img: '/src/components/icons/svg/done.svg'
     }
@@ -96,6 +96,15 @@ const tilleList2 = ref([
 </script>
 
 <style lang="scss">
+.mb-6 {
+    margin-bottom: 5.5rem !important;
+}
+.w-md-48 {
+    @media screen and (min-width: 767.98px){
+        width: 48% !important;
+    }
+}
+
 .big-size {
     width: 717px;
     height: 190px;

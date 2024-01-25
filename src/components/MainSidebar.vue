@@ -16,7 +16,7 @@
   </aside>
 
   <!-- Bottom Menu  -->
-  <nav class="navbar fixed-bottom d-lg-none shadow">
+  <nav class="navbar fixed-bottom d-lg-none shadow bg-white">
     <div class="container d-flex justify-content-around">
         <router-link to="/summary" class="btn btn-light py-3 d-flex justify-items-center"><img src="./icons/svg/menu_summary.svg" /></router-link>
         <a class="btn btn-light py-3 d-flex justify-items-center"><img src="./icons/svg/menu_board.svg"/></a>
