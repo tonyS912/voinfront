@@ -67,7 +67,7 @@ const tilleList1 = ref([
         count: 18,
         classes: 'mt-4 my-lg-0 bg-lavendel small-size hover-to-do',
         text: 'text-primary',
-        img: '/src/assets/icons/todo_list.webp'
+        img: '@/src/assets/icons/todo_list.webp'
     }
 ])
 
