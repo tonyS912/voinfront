@@ -1,4 +1,5 @@
 <template>
+    <!-- TODO: Later change to <RouterLink to="/board", maybee role="button" can be removed -->
     <div role="button"
         class="card col-12 d-flex flex-center align-items-center justify-content-center rounded-5 p-4"
         :class="tille.classes"
