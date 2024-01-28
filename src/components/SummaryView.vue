@@ -67,7 +67,7 @@ const tilleList1 = ref([
         count: 18,
         classes: 'mt-4 my-lg-0 bg-lavendel small-size hover-to-do',
         text: 'text-primary',
-        img: '/src/components/icons/svg/todo_list.svg'
+        img: '/src/components/icons/todo_list.webp'
     }
 ])
 
@@ -78,7 +78,7 @@ const tilleList2 = ref([
         count: 4,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/components/icons/svg/board.svg'
+        img: '/src/components/icons/board.webp'
     },
     {
         id: 1,
@@ -86,7 +86,7 @@ const tilleList2 = ref([
         count: 1,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/components/icons/svg/in_progress.svg'
+        img: '/src/components/icons/in_progress.webp'
     },
     {
         id: 2,
@@ -94,7 +94,7 @@ const tilleList2 = ref([
         count: 2,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/components/icons/svg/awaiting_feedback.svg'
+        img: '/src/components/icons/awaiting_feedback.webp'
     },
     {
         id: 3,
@@ -102,7 +102,7 @@ const tilleList2 = ref([
         count: 9,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/components/icons/svg/done.svg'
+        img: '/src/components/icons/done.webp'
     }
 ])
 </script>

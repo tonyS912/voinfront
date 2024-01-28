@@ -8,16 +8,16 @@
                 <router-link
                     to="/summary"
                     class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0"
-                    ><img class="me-2" src="./icons/svg/menu_summary.svg" />Summary</router-link
+                    ><img class="me-2" src="./icons/menu_summary.webp" />Summary</router-link
                 >
                 <li class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0">
-                    <img class="me-2" src="./icons/svg/menu_board.svg" />Board
+                    <img class="me-2" src="./icons/menu_board.webp" />Board
                 </li>
                 <li class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0">
-                    <img class="me-2" src="./icons/svg/menu_add_task.svg" />Add Task
+                    <img class="me-2" src="./icons/menu_add_task.webp" />Add Task
                 </li>
                 <li class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0">
-                    <img class="me-2" src="./icons/svg/menu_contacts.svg" />Contacts
+                    <img class="me-2" src="./icons/menu_contacts.webp" />Contacts
                 </li>
             </ul>
             <ul class="list-group justify-content-end">
@@ -41,16 +41,16 @@
                 to="/summary"
                 active-class="active"
                 class="btn btn-light py-3 d-flex justify-items-center"
-                ><img src="./icons/svg/menu_summary.svg"
+                ><img src="./icons/menu_summary.webp"
             /></router-link>
             <a class="btn btn-light py-3 d-flex justify-items-center"
-                ><img src="./icons/svg/menu_board.svg"
+                ><img src="./icons/menu_board.webp"
             /></a>
             <a class="btn btn-light py-3 d-flex justify-items-center"
-                ><img src="./icons/svg/menu_add_task.svg"
+                ><img src="./icons/menu_add_task.webp"
             /></a>
             <a class="btn btn-light py-3 d-flex justify-items-center"
-                ><img src="./icons/svg/menu_contacts.svg"
+                ><img src="./icons/menu_contacts.webp"
             /></a>
         </div>
     </nav>
