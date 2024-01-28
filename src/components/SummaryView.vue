@@ -20,7 +20,7 @@
                         <div>
                             <img
                                 class="icon-sum tilies-hov icon-size-lg rounded-circle border-2 border border-white"
-                                src="../assets/icons/Urgent.webp"
+                                src="@/assets/icons/Urgent.webp"
                             />
                         </div>
                         <span class="fs-1 ms-3"><b>5</b></span>
