@@ -1,12 +1,15 @@
 <template>
     <div
-        class="container container-xl col-12 col-sm-10 d-flex flex-column justify-content-center align-items-center align-items-xl-between mt-3 mb-6 mx-xl-auto px-xl-0"
+        class="container container-xl col-12 col-sm-9 d-flex flex-column justify-content-center align-items-center align-items-xl-between mb-6 mt-3 mt-lg-0 mx-xl-auto px-xl-0"
     >
-        <h1>Grüßbert, <b>Guest</b></h1>
+        <h1 class="mb-md-2 mb-lg-3">Grüßbert, <b>Guest</b></h1>
 
         <!-- First line Tillies on Summary -->
-        <div class="column col-12 d-flex flex-column flex-xl-row justify-content-center justify-content-xl-between align-items-center mb-3 mb-lg-0">
+        <div
+            class="column box-xl-size col-12 d-flex flex-column flex-xl-row justify-content-center justify-content-xl-between align-items-center mb-3 mb-lg-0"
+        >
             <div
+                role="button"
                 class="card col-12 col-lg-7 big-size d-flex flex-center flex-lg-row align-items-center justify-content-center bg-primary text-white rounded-5 p-3 my-3 my-xl-0"
             >
                 <div
@@ -34,14 +37,14 @@
                     >
                 </div>
             </div>
-            
+
             <SmallTiles v-for="item in tilleList1" :tille="item" :key="item.id"></SmallTiles>
         </div>
 
         <!-- Second line Tillies on Summary -->
-        <!-- <div class="overrides-row col-12 col-lg-10 justify-content-between">
+        <div class="box-size box-xl-size overrides-row col-12 col-lg-10 justify-content-between">
             <SmallTiles v-for="item in tilleList2" :tille="item" :key="item.id"></SmallTiles>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -58,46 +61,46 @@ const tilleList1 = ref([
         id: 0,
         title: 'Task To-do',
         count: 18,
-        classes: 'mt-4 my-lg-0 bg-lavendel small-size',
+        classes: 'mt-4 my-lg-0 bg-lavendel small-size hover-to-do',
         text: 'text-primary',
         img: '/src/components/icons/svg/todo_list.svg'
     }
 ])
 
-/* const tilleList2 = ref([
+const tilleList2 = ref([
     {
         id: 0,
         title: 'Task in Board',
         count: 4,
-        classes: 'my-3 w-md-48 small-size',
-        text: 'text-primary',
+        classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
+        text: 'text-primary hover-text',
         img: '/src/components/icons/svg/board.svg'
     },
     {
         id: 1,
         title: 'Task on Progress',
         count: 1,
-        classes: 'my-3 w-md-48 small-size',
-        text: 'text-primary',
+        classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
+        text: 'text-primary hover-text',
         img: '/src/components/icons/svg/in_progress.svg'
     },
     {
         id: 2,
         title: 'Awaiting Feedback',
         count: 2,
-        classes: 'my-3 w-md-48 small-size',
-        text: 'text-primary',
+        classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
+        text: 'text-primary hover-text',
         img: '/src/components/icons/svg/awaiting_feedback.svg'
     },
     {
         id: 3,
         title: 'Task Done',
         count: 9,
-        classes: 'my-3 w-md-48 small-size',
-        text: 'text-primary',
+        classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
+        text: 'text-primary hover-text',
         img: '/src/components/icons/svg/done.svg'
     }
-]) */
+])
 </script>
 
 <style lang="scss">
@@ -126,8 +129,16 @@ const tilleList1 = ref([
         height: 192px;
     }
 
+    .box-size {
+        width: 682px;
+    }
+
     .small-size {
         max-width: 682px;
+    }
+
+    .small-lg-size {
+        width: 416px;
     }
 
     .container-xl {
@@ -135,7 +146,7 @@ const tilleList1 = ref([
     }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991.98px) {
     .mb-6 {
         margin-bottom: 5.5rem !important;
     }
@@ -143,8 +154,42 @@ const tilleList1 = ref([
 
 @media screen and (min-width: 1199.98px) {
     .small-size {
-        width: 210px;
+        width: 210px !important;
         height: 192px;
+    }
+
+    .box-xl-size {
+        width: 925px !important;
+    }
+}
+
+.hover-to-do {
+    &:hover {
+        background-color: #fff;
+        color: #4589ff;
+        transition: all 0.3s ease-in-out;
+        transform: scale(1.15);
+        border-top-left-radius: 0 !important;
+    }
+}
+
+.hover-tille {
+    &:hover {
+        background-color: #4589ff;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+        transform: scale(1.15);
+        border-top-left-radius: 0 !important;
+
+        .hover-text {
+            color: #fff !important;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .icon-hov {
+            border: 2px solid #fff !important;
+            border-radius: 50%;
+        }
     }
 }
 </style>
