@@ -9,7 +9,7 @@
                     to="/summary"
                     class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0"
 
-                    ><img class="me-2" src="../assets/icons/menu_summary.svg" />Summary</router-link
+                    ><img class="me-2" src="@/assets/icons/menu_summary.svg" />Summary</router-link
                 >
                 <li class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0">
                     <img class="me-2" src="../assets/icons/menu_board.svg" />Board
