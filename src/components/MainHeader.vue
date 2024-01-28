@@ -1,6 +1,6 @@
 <script setup>
-import IconJoinLogo from './icons/IconJoinLogo.vue'
-import IconQuestionCircle from './icons/IconQuestionCircle.vue'
+import IconJoinLogo from '../assets/icons/IconJoinLogo.vue'
+import IconQuestionCircle from '../assets/icons/IconQuestionCircle.vue'
 import JoinAvatar from './JoinAvatar.vue'
 </script>
 
