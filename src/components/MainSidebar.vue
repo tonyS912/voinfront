@@ -1,6 +1,6 @@
 <template>
   <!-- Side Menu -->
-  <aside class="d-none d-lg-block box-shadow shdaow-end shadow aside-size col-2">
+  <aside class="d-none d-lg-block box-shadow shdaow-end shadow aside-size col-3">
     <div class="container py-5 px-4 h-100 row d-flex justify-content-between ms-1">
       <ul class="list-group">
         <router-link to="/summary" class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0"><img class="me-2" src="./icons/svg/menu_summary.svg" />Summary</router-link>

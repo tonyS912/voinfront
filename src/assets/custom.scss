@@ -1,6 +1,35 @@
 $my-primary: #4589ff;
+$my-secondary: #42526e;
+$my-tertiary: #d2e2fe;
+$my-accent: #0040ff;
+$my-success: #198754;
+$my-info: #0dcaf0;
+$my-warning: #ffc107;
+$my-danger: #dc3545;
+$my-light: #f8f9fa;
+$my-dark: #212529;
 
 $theme-colors: (
     // scss-docs-start theme-color-variables
     primary: $my-primary,
+    'secondary': $my-secondary,
+    'tertiary': $my-tertiary,
+    'accent': $my-accent,
+    'success': $my-success,
+    'info': $my-info,
+    'warning': $my-warning,
+    'danger': $my-danger,
+    'light': $my-light,
+    'dark': $my-dark
+);
+
+$grid-breakpoints: (
+    // scss-docs-start breakpoints
+    xxs: 0,
+    xs: 400px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
 );
