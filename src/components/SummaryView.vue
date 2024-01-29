@@ -60,6 +60,22 @@ const currentDay = ref(
     new Date().toLocaleDateString('iso', { month: 'long', day: 'numeric', year: 'numeric' })
 )
 
+const imgTodo = ref(
+    new URL('@/assets/icons/todo_list.webp', import.meta.url).href
+)
+const imgBoard = ref(
+    new URL('@/assets/icons/board.webp', import.meta.url).href
+)
+const imgProgress = ref(
+    new URL('@/assets/icons/in_progress.svg', import.meta.url).href
+)
+const imgFeedback = ref(
+    new URL('@/assets/icons/awaiting_feedback.webp', import.meta.url).href
+)
+const imgDone = ref(
+    new URL('@/assets/icons/done.webp', import.meta.url).href
+)
+
 const tilleList1 = ref([
     {
         id: 0,
@@ -67,7 +83,7 @@ const tilleList1 = ref([
         count: 18,
         classes: 'mt-4 my-lg-0 bg-lavendel small-size hover-to-do',
         text: 'text-primary',
-        img: '@/src/assets/icons/todo_list.webp'
+        img: imgTodo
     }
 ])
 
@@ -78,7 +94,7 @@ const tilleList2 = ref([
         count: 4,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/assets/icons/board.webp'
+        img: imgBoard
     },
     {
         id: 1,
@@ -86,7 +102,7 @@ const tilleList2 = ref([
         count: 1,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/assets/icons/in_progress.svg'
+        img: imgProgress
     },
     {
         id: 2,
@@ -94,7 +110,7 @@ const tilleList2 = ref([
         count: 2,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/assets/icons/awaiting_feedback.webp'
+        img: imgFeedback
     },
     {
         id: 3,
@@ -102,7 +118,7 @@ const tilleList2 = ref([
         count: 9,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/assets/icons/done.webp'
+        img: imgDone
     }
 ])
 </script>
