@@ -7,7 +7,7 @@
         <div class="col-12 d-flex flex-column align-items-center justify-content-center">
             <div class="d-flex justify-content-center align-items-center">
                 <div>
-                    <img class="icon-size-lg me-3 icon-hov" :src="tille.img" />
+                    <img class="icon-size-lg me-3 icon-hov" :src='tille.img' />
                 </div>
                 <span class="fs-1 text-hov"
                     ><b>{{ tille.count }}</b></span

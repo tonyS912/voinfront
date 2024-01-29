@@ -20,7 +20,7 @@
                         <div>
                             <img
                                 class="icon-sum tilies-hov icon-size-lg rounded-circle border-2 border border-white"
-                                src="./icons/Urgent.webp"
+                                src="@/assets/icons/Urgent.webp"
                             />
                         </div>
                         <span class="fs-1 ms-3"><b>5</b></span>
@@ -60,6 +60,22 @@ const currentDay = ref(
     new Date().toLocaleDateString('iso', { month: 'long', day: 'numeric', year: 'numeric' })
 )
 
+const imgTodo = ref(
+    new URL('@/assets/icons/todo_list.webp', import.meta.url).href
+)
+const imgBoard = ref(
+    new URL('@/assets/icons/board.webp', import.meta.url).href
+)
+const imgProgress = ref(
+    new URL('@/assets/icons/in_progress.svg', import.meta.url).href
+)
+const imgFeedback = ref(
+    new URL('@/assets/icons/awaiting_feedback.webp', import.meta.url).href
+)
+const imgDone = ref(
+    new URL('@/assets/icons/done.webp', import.meta.url).href
+)
+
 const tilleList1 = ref([
     {
         id: 0,
@@ -67,7 +83,7 @@ const tilleList1 = ref([
         count: 18,
         classes: 'mt-4 my-lg-0 bg-lavendel small-size hover-to-do',
         text: 'text-primary',
-        img: '/src/components/icons/svg/todo_list.svg'
+        img: imgTodo
     }
 ])
 
@@ -78,7 +94,7 @@ const tilleList2 = ref([
         count: 4,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/components/icons/svg/board.svg'
+        img: imgBoard
     },
     {
         id: 1,
@@ -86,7 +102,7 @@ const tilleList2 = ref([
         count: 1,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/components/icons/svg/in_progress.svg'
+        img: imgProgress
     },
     {
         id: 2,
@@ -94,7 +110,7 @@ const tilleList2 = ref([
         count: 2,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/components/icons/svg/awaiting_feedback.svg'
+        img: imgFeedback
     },
     {
         id: 3,
@@ -102,7 +118,7 @@ const tilleList2 = ref([
         count: 9,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
-        img: '/src/components/icons/svg/done.svg'
+        img: imgDone
     }
 ])
 </script>
