@@ -33,3 +33,4 @@ test-results/
 playwright-report/
 voin.code-workspace
 
+.env
