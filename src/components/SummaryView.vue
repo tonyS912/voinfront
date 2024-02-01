@@ -55,7 +55,6 @@
 <script setup>
 import { ref } from 'vue'
 import SmallTiles from './SmallTiles.vue'
-import { useDocument } from 'vuefire'
 
 const currentDay = ref(
     new Date().toLocaleDateString('iso', { month: 'long', day: 'numeric', year: 'numeric' })
@@ -114,6 +113,8 @@ const tilleList2 = ref([
 ])
 
 // ! Firebase Communication
+
+
 
 </script>
 
