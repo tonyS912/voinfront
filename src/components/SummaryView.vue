@@ -55,26 +55,17 @@
 <script setup>
 import { ref } from 'vue'
 import SmallTiles from './SmallTiles.vue'
+import { useDocument } from 'vuefire'
 
 const currentDay = ref(
     new Date().toLocaleDateString('iso', { month: 'long', day: 'numeric', year: 'numeric' })
 )
 
-const imgTodo = ref(
-    new URL('@/assets/icons/todo_list.webp', import.meta.url).href
-)
-const imgBoard = ref(
-    new URL('@/assets/icons/board.webp', import.meta.url).href
-)
-const imgProgress = ref(
-    new URL('@/assets/icons/in_progress.svg', import.meta.url).href
-)
-const imgFeedback = ref(
-    new URL('@/assets/icons/awaiting_feedback.webp', import.meta.url).href
-)
-const imgDone = ref(
-    new URL('@/assets/icons/done.webp', import.meta.url).href
-)
+const imgTodo = ref(new URL('@/assets/icons/todo_list.webp', import.meta.url).href)
+const imgBoard = ref(new URL('@/assets/icons/board.webp', import.meta.url).href)
+const imgProgress = ref(new URL('@/assets/icons/in_progress.svg', import.meta.url).href)
+const imgFeedback = ref(new URL('@/assets/icons/awaiting_feedback.webp', import.meta.url).href)
+const imgDone = ref(new URL('@/assets/icons/done.webp', import.meta.url).href)
 
 const tilleList1 = ref([
     {
@@ -121,6 +112,9 @@ const tilleList2 = ref([
         img: imgDone
     }
 ])
+
+// ! Firebase Communication
+
 </script>
 
 <style lang="scss">
@@ -189,7 +183,7 @@ const tilleList2 = ref([
         color: #4589ff !important;
         transition: all 0.3s ease-in-out;
         transform: scale(1.09);
-        
+
         border-top-left-radius: 0 !important;
 
         .text-hov {
