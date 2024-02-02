@@ -1,10 +1,11 @@
-# voin
+# Voin a Kanban Tool
 
 This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+## Just for Information
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+This Kanban Management Tool is only a Project to Learn the work with Vue3, Vite, Pinia and Firebase. It is not usable for daily or commercial work. Database will be set back daily.
+
 
 ## Customize configuration
 
