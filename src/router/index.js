@@ -18,6 +18,11 @@ const router = createRouter({
       component: () => import('../components/SummaryView.vue')
     },
     {
+      path: '/add-task',
+      name: 'addtask',
+      component: () => import('../components/AddTaskView.vue')
+    },
+    {
       path: '/:catchAll(.*)*',
       component: () => import('../views/ErrorNotFound.vue')
     }

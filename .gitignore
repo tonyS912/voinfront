@@ -34,4 +34,5 @@ playwright-report/
 voin.code-workspace
 
 .env
+.dev
 src/firebase/index.js

@@ -5,18 +5,26 @@
             <ul class="list-group">
 
                 <!-- TODO: Router Links to jump to next page -->
+                <!-- Link to Summary Page -->
                 <router-link
                     to="/summary"
                     class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0"
-
                     ><img class="me-2" src="@/assets/icons/menu_summary.svg" />Summary</router-link
                 >
+
+                <!-- Link to Add Task Page -->
+                <router-link
+                    to="/add-task"
+                    class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0">
+                    <img class="me-2" src="@/assets/icons/menu_add_task.svg" />Add Task
+                </router-link>
+
                 <li class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0">
                     <img class="me-2" src="@/assets/icons/menu_board.svg" />Board
                 </li>
-                <li class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0">
-                    <img class="me-2" src="@/assets/icons/menu_add_task.svg" />Add Task
-                </li>
+
+                
+
                 <li class="btn btn-light py-3 d-flex justify-items-start list-group-item border-0">
                     <img class="me-2" src="@/assets/icons/menu_contacts.svg" />Contacts
                 </li>
