@@ -1,3 +1,17 @@
 body {
   margin: 0;
 }
+
+form::-webkit-scrollbar {
+  width: 10px;
+}
+
+form::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+form::-webkit-scrollbar-thumb {
+  background-color: #a2c1fbcd;    /* color of the scroll thumb */
+  border-radius: 10px;            /* roundness of the scroll thumb */
+  border: 3px solid transparent;  /* creates padding around scroll thumb */
+}
