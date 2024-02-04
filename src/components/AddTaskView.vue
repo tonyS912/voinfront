@@ -73,7 +73,6 @@
                     <label for="taskAssignee" class="form-label">Assignee (optional)</label>
                     <select class="form-select" id="taskStatus">
                         <option disabled selected value="">Choose...</option>
-                        <option v-for="contact in contacts" :key="contact.id" value="`${contact.first_name}-${contact.last_name}`"><input type="checkbox" :value="contact.id" v-model="selectedContacts">{{ contact.first_name }} {{ contact.last_name }}</option>
                     </select>
                 </div>
                 <div class="mb-3">
