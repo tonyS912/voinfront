@@ -38,8 +38,8 @@
                     <label for="taskPriority" class="form-label">Priority</label>
                     <div class="d-flex flex-row justify-content-between">
                         <button
-                            :class="{ active: isActive }"
-                            @click="isActive = !isActive"
+                            :class="{ active: isActiveSuccess }"
+                            @click="setActive('success')"
                             type="button"
                             class="col-3 btn shadow-sm btn-outline-success"
                         >
@@ -49,8 +49,8 @@
                             />
                         </button>
                         <button
-                            :class="{ active: isActive }"
-                            @click="isActive = !isActive"
+                            :class="{ active: isActiveWarning }"
+                            @click="setActive('warning')"
                             type="button"
                             class="col-3 btn shadow-sm btn-outline-warning"
                         >
@@ -60,8 +60,8 @@
                             />
                         </button>
                         <button
-                            :class="{ active: isActive }"
-                            @click="isActive = !isActive"
+                            :class="{ active: isActiveDanger }"
+                            @click="setActive('danger')"
                             type="button"
                             class="col-3 btn shadow-sm btn-outline-danger"
                         >
@@ -70,17 +70,21 @@
                     </div>
                 </div>
                 <div class="mb-3">
+                    <label for="taskAssignee" class="form-label">Assignee (optional)</label>
+                    <select class="form-select" id="taskStatus">
+                        <option disabled selected value="">Choose...</option>
+                        <option v-for="contact in contacts" :key="contact.id" value="`${contact.first_name}-${contact.last_name}`"><input type="checkbox" :value="contact.id" v-model="selectedContacts">{{ contact.first_name }} {{ contact.last_name }}</option>
+                        <option v-for="contact in contacts" :key="contact.id" value="`${contact.first_name}-${contact.last_name}`"><input type="checkbox" :value="contact.id" v-model="selectedContacts">{{ contact.first_name }} {{ contact.last_name }}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="taskStatus" class="form-label">Status</label>
                     <select class="form-select" id="taskStatus">
-                        <option selected>Choose...</option>
+                        <option disabled selected value="">Choose ...</option>
                         <option value="1">To Do</option>
                         <option value="2">In Progress</option>
                         <option value="3">Done</option>
                     </select>
-                </div>
-                <div class="mb-3">
-                    <label for="taskAssignee" class="form-label">Assignee (optional)</label>
-                    <input type="text" class="form-control" id="taskAssignee" />
                 </div>
                 <div class="mb-3">
                     <label for="taskTags" class="form-label">Subtasks (optional)</label>
@@ -112,7 +116,25 @@ import arrowUpIcon from '../assets/icons/arrowUpIcon.vue'
 import arrowRightIcon from '../assets/icons/arrowRightIcon.vue'
 import arrowDownIcon from '../assets/icons/arrowDownIcon.vue'
 
-let isActive = ref(false)
+/*
+Priority Buttons 
+ */
+let isActiveSuccess = ref(false)
+let isActiveWarning = ref(false)
+let isActiveDanger = ref(false)
+
+const setActive = (button) => {
+    if (button === 'success') {
+        isActiveSuccess.value = !isActiveSuccess.value
+        isActiveWarning.value = isActiveDanger.value = false
+    } else if (button === 'warning') {
+        isActiveWarning.value = !isActiveWarning.value
+        isActiveSuccess.value = isActiveDanger.value = false
+    } else if (button === 'danger') {
+        isActiveDanger.value = !isActiveDanger.value
+        isActiveSuccess.value = isActiveWarning.value = false
+    }
+}
 
 /* 
 Add Task
