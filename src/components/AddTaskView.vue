@@ -43,10 +43,8 @@
                             type="button"
                             class="col-3 btn shadow-sm btn-outline-success"
                         >
-                            Urgent<arrowUpIcon
-                                class="ms-3 mb-1"
-                                style="height: 20px; width: 20px"
-                            />
+                            Urgent
+                            <arrowUpIcon class="ms-3 mb-1" style="height: 20px; width: 20px" />
                         </button>
                         <button
                             :class="{ active: isActiveWarning }"
@@ -54,10 +52,8 @@
                             type="button"
                             class="col-3 btn shadow-sm btn-outline-warning"
                         >
-                            Medium<arrowRightIcon
-                                class="ms-3 mb-1"
-                                style="height: 20px; width: 20px"
-                            />
+                            Medium
+                            <arrowRightIcon class="ms-3 mb-1" style="height: 20px; width: 20px" />
                         </button>
                         <button
                             :class="{ active: isActiveDanger }"
@@ -65,24 +61,57 @@
                             type="button"
                             class="col-3 btn shadow-sm btn-outline-danger"
                         >
-                            Low<arrowDownIcon class="ms-3 mb-1" style="height: 20px; width: 20px" />
+                            Low
+                            <arrowDownIcon class="ms-3 mb-1" style="height: 20px; width: 20px" />
                         </button>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="taskAssignee" class="form-label">Assignee (optional)</label>
-                    <select class="form-select" id="taskStatus">
-                        <option disabled selected value="">Choose...</option>
-                    </select>
+                <div class="mb-3 dropdown">
+                    <input
+                        for="taskAssignee"
+                        class="form-control dropdown-toggle"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        placeholder="Assignee (Optional)"
+                    />
+                    <ul class="dropdown-menu w-100" id="taskAssignee" @click.stop>
+                        <li
+                            v-for="(contact, index) in allContacts"
+                            class="dropdown-item"
+                            @click="toggleCheckbox(index)"
+                        >
+                            <input
+                                class="me-3 my-2"
+                                type="checkbox"
+                                :id="`contact-${index}`"
+                                v-model="contact.checked"
+                            />
+                            <label :for="`contact-${index}`" class="w-100"
+                                >{{ contact.firstName }} {{ contact.lastName }}</label
+                            >
+                        </li>
+                    </ul>
                 </div>
-                <div class="mb-3">
-                    <label for="taskStatus" class="form-label">Status</label>
-                    <select class="form-select" id="taskStatus">
-                        <option disabled selected value="">Choose ...</option>
-                        <option value="1">To Do</option>
-                        <option value="2">In Progress</option>
-                        <option value="3">Done</option>
-                    </select>
+                <div class="mb-3 dropdown">
+                    <input
+                        v-model="stateCategory"
+                        class="form-control dropdown-toggle"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        placeholder="Category"
+                        required
+                    />
+                    <ul class="dropdown-menu w-100" id="taskCategory">
+                        <li
+                            v-for="category in allCategories"
+                            class="dropdown-item"
+                            @click="selectCategory(category)"
+                        >
+                            <label class="w-100">{{ category.category }}</label>
+                        </li>
+                    </ul>
                 </div>
                 <div class="mb-3">
                     <label for="taskTags" class="form-label">Subtasks (optional)</label>
@@ -135,9 +164,72 @@ const setActive = (button) => {
 }
 
 /* 
+Load Assignees and Categories
+*/
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '@/firebase'
+import { onMounted } from 'vue'
+
+const allContacts = ref([])
+const allCategories = ref([])
+
+onMounted(async () => {
+    const querySnapshotContacts = await getDocs(collection(db, 'contacts'))
+    const querySnapshotCategories = await getDocs(collection(db, 'categorys'))
+    let currentContacts = []
+    let currentCategories = []
+    querySnapshotContacts.forEach((doc) => {
+        // console.log(doc.id, ' => ', doc.data())
+        const contact = {
+            id: doc.id,
+            firstName: doc.data().first_name,
+            lastName: doc.data().last_name,
+            checked: false
+        }
+        currentContacts.push(contact)
+    })
+    allContacts.value = currentContacts
+    // console.log(allContacts.value);
+
+    querySnapshotCategories.forEach((doc) => {
+        // console.log(doc.id, ' => ', doc.data())
+        const category = {
+            id: doc.id,
+            category: doc.data().title
+        }
+        currentCategories.push(category)
+    })
+    allCategories.value = currentCategories
+})
+
+import { reactive } from 'vue'
+
+let stateContacts = reactive({
+    allContacts: []
+})
+
+const toggleCheckbox = (index) => {
+    if (
+        index >= 0 &&
+        index < stateContacts.allContacts.length &&
+        stateContacts.allContacts[index]
+    ) {
+        stateContacts.allContacts[index].checked = !stateContacts.allContacts[index].checked
+    }
+}
+
+/* 
+Use Category
+*/
+let stateCategory = ref('')
+
+const selectCategory = (category) => {
+    stateCategory.value = category.category
+}
+
+/* 
 Add Task
 */
-
 const addTask = () => {
     console.log('Add Task')
 }
