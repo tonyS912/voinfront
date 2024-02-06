@@ -92,6 +92,7 @@
                             v-for="(contact, index) in allContacts"
                             class="dropdown-item"
                             @click="toggleCheckbox(index)"
+                            :key="`contact-${index}`"
                         >
                             <input
                                 class="me-3 my-2"
@@ -122,6 +123,7 @@
                             v-for="category in allCategories"
                             class="dropdown-item"
                             @click="selectCategory(category)"
+                            :key="category.id"
                         >
                             <label class="w-100">{{ category.category }}</label>
                         </li>
