@@ -1,11 +1,15 @@
 <template>
     <div class="w-100 d-flex justify-content-center align-items-center">
+
+        <!-- * The Form that Handle the entire Add Task Section -->
         <form
             @submit.prevent="addTask"
             class="col-11 col-lg-10 d-flex flex-column flex-md-row mt-4 overflow-y-scroll justify-content-between align-items-center align-items-md-end"
             style="max-height: calc(100vh - 200px)"
         >
             <div class="col-11 col-md-6">
+
+                <!-- * First Input-Field: Thats the Title of the new Task -->
                 <div class="form-floating mb-3">
                     <input
                         type="text"
@@ -18,6 +22,8 @@
                         ><small>Please enter a title for your task</small></span
                     >
                 </div>
+
+                <!-- * Second Input-Field: Thats the Description of the new Task -->
                 <div class="form-floating mb-3">
                     <textarea
                         style="max-height: 200px; min-height: 100px"
@@ -30,10 +36,14 @@
                         >Task Description (optional)</label
                     >
                 </div>
+
+                <!-- * Third Input-Field: Thats the Due-Date of the new Task -->
                 <div class="mb-3">
                     <label for="taskDueDate" class="form-label">Due Date</label>
                     <input type="date" class="form-control" id="taskDueDate" />
                 </div>
+
+                <!-- * Fourth Input-Field: Thats the Priority of the new Task -->
                 <div class="mb-3">
                     <label for="taskPriority" class="form-label">Priority</label>
                     <div class="d-flex flex-row justify-content-between">
@@ -66,6 +76,8 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- * Fifth Input-Field: Thats the Assignee of the new Task -->
                 <div class="mb-3 dropdown">
                     <input
                         for="taskAssignee"
@@ -93,6 +105,8 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- * Sixth Input-Field: Thats the Category of the new Task -->
                 <div class="mb-3 dropdown">
                     <input
                         v-model="stateCategory"
@@ -113,11 +127,15 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- * Seventh Input-Field: Thats the Subtasks of the new Task -->
                 <div class="mb-3">
                     <label for="taskTags" class="form-label">Subtasks (optional)</label>
                     <input type="text" class="form-control" id="taskTags" />
                 </div>
             </div>
+
+            <!-- * The Buttons to Clear the Form and to Create the Task -->
             <div
                 class="col-11 col-md-5 d-flex justify-content-between justify-content-md-end align-items-end me-md-2 my-3 my-md-0 mb-md-3 sticky-top"
             >

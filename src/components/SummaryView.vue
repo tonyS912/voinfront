@@ -4,11 +4,11 @@
     >
         <h1 class="mb-md-2 mb-lg-3 mb-xl-4">Grüßbert, <b>Guest</b></h1>
 
-        <!-- First line Tillies on Summary -->
+        <!-- * First line Tillies on Summary -->
         <div
             class="column box-xl-size col-12 d-flex flex-column flex-xl-row justify-content-center justify-content-xl-between align-items-center mb-3"
         >
-            <!-- TODO: Later change to <RouterLink to="/board", maybee role="button" can be removed -->
+            <!-- TODO: Later change to <RouterLink to="/board" -->
             <div
                 role="button"
                 class="card col-12 col-lg-7 big-size d-flex flex-center flex-lg-row align-items-center justify-content-center bg-primary text-white rounded-5 p-3 my-3 my-xl-0 hover-urgent"
@@ -39,14 +39,14 @@
                 </div>
             </div>
 
-            <!-- TODO: Later change to <RouterLink to="/board", maybee role="button" can be removed -->
+            <!-- ! Router Link update will be changed in Tillie it self -->
             <SmallTiles v-for="item in tilleList1" :tille="item" :key="item.id"></SmallTiles>
         </div>
 
-        <!-- Second line Tillies on Summary -->
 
+        <!-- * Second line Tillies on Summary -->
+        <!-- ! Router Link update will be changed in Tillie it self -->
         <div class="box-size box-xl-size overrides-row col-12 col-lg-10 justify-content-between">
-            <!-- TODO: Later change to <RouterLink to="/board", maybee role="button" can be removed -->
             <SmallTiles v-for="item in tilleList2" :tille="item" :key="item.id"></SmallTiles>
         </div>
     </div>
@@ -114,7 +114,12 @@ const tilleList2 = ref([
 
 // ! Firebase Communication
 
-
+// TODO: Work on the Firebase Communication
+/* let todoCount = ref(0)
+let boardCount = ref(0)
+let progressCount = ref(0)
+let feedbackCount = ref(0)
+let doneCount = ref(0) */
 
 </script>
 
