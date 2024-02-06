@@ -133,7 +133,7 @@
                 <!-- * Seventh Input-Field: Thats the Subtasks of the new Task -->
                 <div class="mb-3">
                     <label for="taskTags" class="form-label">Subtasks (optional)</label>
-                    <input type="text" class="form-control" id="taskTags" />
+                    <input type="text" class="form-control" id="taskTags" v-model="newSubtask" @keyup.enter="addSubtask"/>
                 </div>
             </div>
 
@@ -246,6 +246,23 @@ let stateCategory = ref('')
 const selectCategory = (category) => {
     stateCategory.value = category.category
 }
+
+/* 
+Adding Subtasks
+*/
+let subtasks = ref([])
+let newSubtask = ref('')
+
+const addSubtask = () => {
+    const subtask = {
+        title: newSubtask.value,
+        done: false
+    }
+    subtasks.value.push(subtask)
+    newSubtask.value = ''
+    console.log(subtasks.value);
+}
+
 
 /* 
 Add Task
