@@ -23,7 +23,7 @@
                                 src="@/assets/icons/Urgent.webp"
                             />
                         </div>
-                        <span class="fs-1 ms-3"><b>5</b></span>
+                        <span class="fs-1 ms-3"><b>0</b></span>
                     </div>
                     <div class="fs-4 mt-3 text-hov text-center text-white">Task Urgent</div>
                 </div>
@@ -53,35 +53,48 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import SmallTiles from './SmallTiles.vue'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '@/firebase'
+import { onMounted } from 'vue'
 
 const currentDay = ref(
     new Date().toLocaleDateString('iso', { month: 'long', day: 'numeric', year: 'numeric' })
 )
 
+// Work on the Firebase Communication
+const todo_list = ref([])
+const in_board = ref([])
+const in_progress = ref([])
+const awaiting_feedback = ref([])
+const done_list = ref([])
+
+/* 
+Generating the Tillies for the Summary
+*/
 const imgTodo = ref(new URL('@/assets/icons/todo_list.webp', import.meta.url).href)
 const imgBoard = ref(new URL('@/assets/icons/board.webp', import.meta.url).href)
 const imgProgress = ref(new URL('@/assets/icons/in_progress.svg', import.meta.url).href)
 const imgFeedback = ref(new URL('@/assets/icons/awaiting_feedback.webp', import.meta.url).href)
 const imgDone = ref(new URL('@/assets/icons/done.webp', import.meta.url).href)
 
-const tilleList1 = ref([
+const tilleList1 = reactive([
     {
         id: 0,
         title: 'Task To-do',
-        count: 18,
+        count: 0,
         classes: 'mt-4 my-lg-0 bg-lavendel small-size hover-to-do',
         text: 'text-primary',
         img: imgTodo
     }
 ])
 
-const tilleList2 = ref([
+const tilleList2 = reactive([
     {
         id: 0,
         title: 'Task in Board',
-        count: 4,
+        count: 0,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgBoard
@@ -89,7 +102,7 @@ const tilleList2 = ref([
     {
         id: 1,
         title: 'Task on Progress',
-        count: 1,
+        count: 0,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgProgress
@@ -97,7 +110,7 @@ const tilleList2 = ref([
     {
         id: 2,
         title: 'Awaiting Feedback',
-        count: 2,
+        count: 0,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgFeedback
@@ -105,21 +118,65 @@ const tilleList2 = ref([
     {
         id: 3,
         title: 'Task Done',
-        count: 9,
+        count: 0,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgDone
     }
 ])
 
+// Watcher for the Tillies
+watch(() => todo_list.value.length, (newLength) => {
+    tilleList1[0].count = newLength;
+});
+// Watcher for the Tillies
+watch(() => in_board.value.length, (newLength) => {
+    tilleList2[0].count = newLength;
+});
+// Watcher for the Tillies
+watch(() => in_progress.value.length, (newLength) => {
+    tilleList2[1].count = newLength;
+});
+// Watcher for the Tillies
+watch(() => awaiting_feedback.value.length, (newLength) => {
+    tilleList2[2].count = newLength;
+});
+// Watcher for the Tillies
+watch(() => done_list.value.length, (newLength) => {
+    tilleList2[3].count = newLength;
+});
+
 // ! Firebase Communication
 
-// TODO: Work on the Firebase Communication
-/* let todoCount = ref(0)
-let boardCount = ref(0)
-let progressCount = ref(0)
-let feedbackCount = ref(0)
-let doneCount = ref(0) */
+/*
+get tasks from firebase
+*/
+onMounted(async () => {
+    const querySnapshot = await getDocs(collection(db, 'tasks'))
+    querySnapshot.forEach((doc) => {
+        const listItem = {
+            id : doc.id,
+            title: doc.data().title,
+            column: doc.data().column
+        }
+        if (listItem.column === 0) {
+            todo_list.value.push(listItem)
+        } else if (listItem.column === 2) {
+            in_board.value.push(listItem)
+        } else if (listItem.column === 3) {
+            in_progress.value.push(listItem)
+        } else if (listItem.column === 4) {
+            awaiting_feedback.value.push(listItem)
+        } else if (listItem.column === 5) {
+            done_list.value.push(listItem)
+        }
+    })
+    console.log(todo_list.value.length);
+    console.log(in_board.value.length);
+    console.log(in_progress.value.length);
+    console.log(awaiting_feedback.value.length);
+    console.log(done_list.value.length)
+})
 
 </script>
 
