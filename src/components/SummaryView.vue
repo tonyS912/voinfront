@@ -43,7 +43,6 @@
             <SmallTiles v-for="item in tilleList1" :tille="item" :key="item.id"></SmallTiles>
         </div>
 
-
         <!-- * Second line Tillies on Summary -->
         <!-- ! Router Link update will be changed in Tillie it self -->
         <div class="box-size box-xl-size overrides-row col-12 col-lg-10 justify-content-between">
@@ -125,26 +124,17 @@ const tilleList2 = reactive([
     }
 ])
 
-// Watcher for the Tillies
-watch(() => todo_list.value.length, (newLength) => {
-    tilleList1[0].count = newLength;
-});
-// Watcher for the Tillies
-watch(() => in_board.value.length, (newLength) => {
-    tilleList2[0].count = newLength;
-});
-// Watcher for the Tillies
-watch(() => in_progress.value.length, (newLength) => {
-    tilleList2[1].count = newLength;
-});
-// Watcher for the Tillies
-watch(() => awaiting_feedback.value.length, (newLength) => {
-    tilleList2[2].count = newLength;
-});
-// Watcher for the Tillies
-watch(() => done_list.value.length, (newLength) => {
-    tilleList2[3].count = newLength;
-});
+const lists = [todo_list, in_board, in_progress, awaiting_feedback, done_list]
+const tiles = [tilleList1[0], ...tilleList2]
+
+for (let i = 0; i < lists.length; i++) {
+    watch(
+        () => lists[i].value.length,
+        (newLength) => {
+            tiles[i].count = newLength
+        }
+    )
+}
 
 // ! Firebase Communication
 
@@ -155,7 +145,7 @@ onMounted(async () => {
     const querySnapshot = await getDocs(collection(db, 'tasks'))
     querySnapshot.forEach((doc) => {
         const listItem = {
-            id : doc.id,
+            id: doc.id,
             title: doc.data().title,
             column: doc.data().column
         }
@@ -171,13 +161,12 @@ onMounted(async () => {
             done_list.value.push(listItem)
         }
     })
-    console.log(todo_list.value.length);
-    console.log(in_board.value.length);
-    console.log(in_progress.value.length);
-    console.log(awaiting_feedback.value.length);
+    console.log(todo_list.value.length)
+    console.log(in_board.value.length)
+    console.log(in_progress.value.length)
+    console.log(awaiting_feedback.value.length)
     console.log(done_list.value.length)
 })
-
 </script>
 
 <style lang="scss">
