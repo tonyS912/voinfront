@@ -77,14 +77,14 @@
 
                 <!-- * Fifth Input-Field: Thats the Assignee of the new Task -->
                 <div class="mb-3 dropdown">
-                    <input
-                        for="taskAssignee"
-                        class="form-control dropdown-toggle"
+                    <button for="taskAssignee"
+                        class="form-control text-start"
                         role="button"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        placeholder="Assignee (Optional)"
-                    />
+                        aria-expanded="false" type="button" >
+                        <!-- <caretDownFill class="float-end me-2 pt-1" style="height: 20px; width: 20px" /> -->
+                        Assignee (Optional)
+                    </button>
                     <ul class="dropdown-menu w-100" id="taskAssignee" @click.stop>
                         <li
                             v-for="(contact, index) in allContacts"
@@ -106,12 +106,13 @@
                 </div>
 
                 <!-- * Hidden Avatar Field for Checked Users, unhide if  user is checked -->
-                <div class="d-flex mb-3" style="height: 42px;">
+                <div class="d-flex mb-3">
                     <div
                         v-for="(contact, index) in selectedContacts"
                         :key="`contact-${index}`"
-                        class="d-flex p-2 me-1 bg-primary rounded-circle border-1 border-gray border text-white"
+                        class="d-flex justify-content-center align-self-center p-2 me-1 bg-primary rounded-circle border-1 border-gray border text-white"
                         type="text"
+                        style="height: 42px; width: 42px"
                         :value="contact.checked"
                     >
                         {{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}
@@ -122,7 +123,7 @@
                 <div class="mb-3 dropdown">
                     <input
                         v-model="stateCategory"
-                        class="form-control dropdown-toggle"
+                        class="form-control"
                         role="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -176,6 +177,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
+import caretDownFill from '../assets/icons/caretDownFill.vue'
 import arrowUpIcon from '../assets/icons/arrowUpIcon.vue'
 import arrowRightIcon from '../assets/icons/arrowRightIcon.vue'
 import arrowDownIcon from '../assets/icons/arrowDownIcon.vue'
