@@ -106,14 +106,15 @@
                 </div>
 
                 <!-- * Hidden Avatar Field for Checked Users, unhide if  user is checked -->
-                <div class="d-flex mb-3">
+                <div class="d-flex mb-3" style="height: 42px;">
                     <div
                         v-for="(contact, index) in selectedContacts"
                         :key="`contact-${index}`"
-                        class="d-flex p-2 me-1 bg-primary rounded-circle border-1 border-gray border"
+                        class="d-flex p-2 me-1 bg-primary rounded-circle border-1 border-gray border text-white"
                         type="text"
                         :value="contact.checked"
-                    >{{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}
+                    >
+                        {{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}
                     </div>
                 </div>
 
@@ -210,8 +211,8 @@ const allContacts = ref([])
 const allCategories = ref([])
 
 const selectedContacts = computed(() => {
-    return allContacts.value.filter(contact => contact.checked);
-});
+    return allContacts.value.filter((contact) => contact.checked)
+})
 
 onMounted(async () => {
     const querySnapshotContacts = await getDocs(collection(db, 'contacts'))
