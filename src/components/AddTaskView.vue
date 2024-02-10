@@ -1,6 +1,5 @@
 <template>
     <div class="w-100 d-flex justify-content-center align-items-center">
-
         <!-- * The Form that Handle the entire Add Task Section -->
         <form
             @submit.prevent="addTask"
@@ -8,7 +7,6 @@
             style="max-height: calc(100vh - 200px)"
         >
             <div class="col-11 col-md-6">
-
                 <!-- * First Input-Field: Thats the Title of the new Task -->
                 <div class="form-floating mb-3">
                     <input
@@ -107,6 +105,18 @@
                     </ul>
                 </div>
 
+                <!-- * Hidden Avatar Field for Checked Users, unhide if  user is checked -->
+                <div class="d-flex mb-3">
+                    <div
+                        v-for="(contact, index) in selectedContacts"
+                        :key="`contact-${index}`"
+                        class="d-flex p-2 me-1 bg-primary rounded-circle border-1 border-gray border"
+                        type="text"
+                        :value="contact.checked"
+                    >{{ contact.firstName.charAt(0) }}{{ contact.lastName.charAt(0) }}
+                    </div>
+                </div>
+
                 <!-- * Sixth Input-Field: Thats the Category of the new Task -->
                 <div class="mb-3 dropdown">
                     <input
@@ -133,7 +143,13 @@
                 <!-- * Seventh Input-Field: Thats the Subtasks of the new Task -->
                 <div class="mb-3">
                     <label for="taskTags" class="form-label">Subtasks (optional)</label>
-                    <input type="text" class="form-control" id="taskTags" v-model="newSubtask" @keyup.enter="addSubtask"/>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="taskTags"
+                        v-model="newSubtask"
+                        @keyup.enter="addSubtask"
+                    />
                 </div>
             </div>
 
@@ -157,7 +173,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 import arrowUpIcon from '../assets/icons/arrowUpIcon.vue'
 import arrowRightIcon from '../assets/icons/arrowRightIcon.vue'
@@ -192,6 +208,10 @@ import { onMounted } from 'vue'
 
 const allContacts = ref([])
 const allCategories = ref([])
+
+const selectedContacts = computed(() => {
+    return allContacts.value.filter(contact => contact.checked);
+});
 
 onMounted(async () => {
     const querySnapshotContacts = await getDocs(collection(db, 'contacts'))
@@ -260,9 +280,8 @@ const addSubtask = () => {
     }
     subtasks.value.push(subtask)
     newSubtask.value = ''
-    console.log(subtasks.value);
+    console.log(subtasks.value)
 }
-
 
 /* 
 Add Task

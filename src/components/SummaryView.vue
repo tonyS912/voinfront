@@ -64,7 +64,7 @@ const currentDay = ref(
 
 // Work on the Firebase Communication
 const todo_list = ref([])
-const in_board = ref([])
+const in_board = ref(0)
 const in_progress = ref([])
 const awaiting_feedback = ref([])
 const done_list = ref([])
@@ -93,7 +93,7 @@ const tilleList2 = reactive([
     {
         id: 0,
         title: 'Task in Board',
-        count: 0,
+        count:  ref(in_board),
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgBoard
@@ -124,6 +124,7 @@ const tilleList2 = reactive([
     }
 ])
 
+// TODO: don't forget to add Upcomming Deadline
 const lists = [todo_list, in_board, in_progress, awaiting_feedback, done_list]
 const tiles = [tilleList1[0], ...tilleList2]
 
@@ -133,11 +134,12 @@ for (let i = 0; i < lists.length; i++) {
         (newLength) => {
             tiles[i].count = newLength
         }
+        
     )
 }
 
 // ! Firebase Communication
-
+// TODO: don't forget to add Upcomming Deadline
 /*
 get tasks from firebase
 */
@@ -151,21 +153,20 @@ onMounted(async () => {
         }
         if (listItem.column === 0) {
             todo_list.value.push(listItem)
-        } else if (listItem.column === 2) {
-            in_board.value.push(listItem)
-        } else if (listItem.column === 3) {
+        } else if (listItem.column === 1) {
             in_progress.value.push(listItem)
-        } else if (listItem.column === 4) {
+        } else if (listItem.column === 2) {
             awaiting_feedback.value.push(listItem)
-        } else if (listItem.column === 5) {
+        } else if (listItem.column === 3) {
             done_list.value.push(listItem)
         }
     })
-    console.log(todo_list.value.length)
-    console.log(in_board.value.length)
-    console.log(in_progress.value.length)
-    console.log(awaiting_feedback.value.length)
-    console.log(done_list.value.length)
+    in_board.value = todo_list.value.length + in_progress.value.length + awaiting_feedback.value.length + done_list.value.length
+    // console.log(todo_list.value.length)
+    // console.log(in_board.value)
+    // console.log(in_progress.value.length)
+    // console.log(awaiting_feedback.value.length)
+    // console.log(done_list.value.length)
 })
 </script>
 
