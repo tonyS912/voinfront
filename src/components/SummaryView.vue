@@ -2,13 +2,13 @@
     <div
         class="container container-xl col-12 col-sm-9 d-flex flex-column justify-content-center align-items-center align-items-xl-between mb-6 mt-3 mt-lg-0 mx-xl-auto px-xl-0"
     >
-        <h1 class="mb-md-2 mb-lg-3 mb-xl-4">Grüßbert, <b>Guest</b></h1>
+        <h1 class="mb-md-2 mb-lg-3 mb-xl-4">Good afternoon, <b>Guest</b></h1>
 
-        <!-- First line Tillies on Summary -->
+        <!-- * First line Tillies on Summary -->
         <div
             class="column box-xl-size col-12 d-flex flex-column flex-xl-row justify-content-center justify-content-xl-between align-items-center mb-3"
         >
-            <!-- TODO: Later change to <RouterLink to="/board", maybee role="button" can be removed -->
+            <!-- TODO: Later change to <RouterLink to="/board" -->
             <div
                 role="button"
                 class="card col-12 col-lg-7 big-size d-flex flex-center flex-lg-row align-items-center justify-content-center bg-primary text-white rounded-5 p-3 my-3 my-xl-0 hover-urgent"
@@ -23,7 +23,7 @@
                                 src="@/assets/icons/Urgent.webp"
                             />
                         </div>
-                        <span class="fs-1 ms-3"><b>5</b></span>
+                        <span class="fs-1 ms-3"><b>{{ urgentTasks }}</b></span>
                     </div>
                     <div class="fs-4 mt-3 text-hov text-center text-white">Task Urgent</div>
                 </div>
@@ -39,49 +39,63 @@
                 </div>
             </div>
 
-            <!-- TODO: Later change to <RouterLink to="/board", maybee role="button" can be removed -->
+            <!-- ! Router Link update will be changed in Tillie it self -->
             <SmallTiles v-for="item in tilleList1" :tille="item" :key="item.id"></SmallTiles>
         </div>
 
-        <!-- Second line Tillies on Summary -->
-
+        <!-- * Second line Tillies on Summary -->
+        <!-- ! Router Link update will be changed in Tillie it self -->
         <div class="box-size box-xl-size overrides-row col-12 col-lg-10 justify-content-between">
-            <!-- TODO: Later change to <RouterLink to="/board", maybee role="button" can be removed -->
             <SmallTiles v-for="item in tilleList2" :tille="item" :key="item.id"></SmallTiles>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import SmallTiles from './SmallTiles.vue'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '@/firebase'
+import { onMounted } from 'vue'
 
 const currentDay = ref(
     new Date().toLocaleDateString('iso', { month: 'long', day: 'numeric', year: 'numeric' })
 )
 
+// Work on the Firebase Communication
+const upcomingDeadline = ref([])
+const urgentTasks = ref(0)
+const todo_list = ref([])
+const in_board = ref(0)
+const in_progress = ref([])
+const awaiting_feedback = ref([])
+const done_list = ref([])
+
+/* 
+Generating the Tillies for the Summary
+*/
 const imgTodo = ref(new URL('@/assets/icons/todo_list.webp', import.meta.url).href)
 const imgBoard = ref(new URL('@/assets/icons/board.webp', import.meta.url).href)
 const imgProgress = ref(new URL('@/assets/icons/in_progress.svg', import.meta.url).href)
 const imgFeedback = ref(new URL('@/assets/icons/awaiting_feedback.webp', import.meta.url).href)
 const imgDone = ref(new URL('@/assets/icons/done.webp', import.meta.url).href)
 
-const tilleList1 = ref([
+const tilleList1 = reactive([
     {
         id: 0,
         title: 'Task To-do',
-        count: 18,
+        count: 0,
         classes: 'mt-4 my-lg-0 bg-lavendel small-size hover-to-do',
         text: 'text-primary',
         img: imgTodo
     }
 ])
 
-const tilleList2 = ref([
+const tilleList2 = reactive([
     {
         id: 0,
         title: 'Task in Board',
-        count: 4,
+        count:  ref(in_board),
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgBoard
@@ -89,7 +103,7 @@ const tilleList2 = ref([
     {
         id: 1,
         title: 'Task on Progress',
-        count: 1,
+        count: 0,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgProgress
@@ -97,7 +111,7 @@ const tilleList2 = ref([
     {
         id: 2,
         title: 'Awaiting Feedback',
-        count: 2,
+        count: 0,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgFeedback
@@ -105,17 +119,64 @@ const tilleList2 = ref([
     {
         id: 3,
         title: 'Task Done',
-        count: 9,
+        count: 0,
         classes: 'my-3 w-md-48 small-size small-lg-size hover-tille',
         text: 'text-primary hover-text',
         img: imgDone
     }
 ])
 
-// ! Firebase Communication
+// Watch the changes in the lists and update the tiles
+const lists = [todo_list, in_board, in_progress, awaiting_feedback, done_list]
+const tiles = [tilleList1[0], ...tilleList2]
+
+for (let i = 0; i < lists.length; i++) {
+    watch(
+        () => lists[i].value.length,
+        (newLength) => {
+            tiles[i].count = newLength
+        }
+    )
+}
+
+// Check if the upcomingDeadline is one week away
+const oneWeekAway = () => {
+    const today = new Date()
+    const oneWeek = new Date(today)
+    oneWeek.setDate(oneWeek.getDate() + 7)
+    upcomingDeadline.value.forEach((date) => {
+        if (new Date(date) < oneWeek) {
+            urgentTasks.value++
+        }
+    })
+    
+}
 
 
-
+// get tasks from firebase
+onMounted(async () => {
+    const querySnapshot = await getDocs(collection(db, 'tasks'))
+    querySnapshot.forEach((doc) => {
+        const listItem = {
+            id: doc.id,
+            title: doc.data().title,
+            column: doc.data().column,
+            dueDate: doc.data().dueDate
+        }
+        if (listItem.column === 0) {
+            todo_list.value.push(listItem)
+        } else if (listItem.column === 1) {
+            in_progress.value.push(listItem)
+        } else if (listItem.column === 2) {
+            awaiting_feedback.value.push(listItem)
+        } else if (listItem.column === 3) {
+            done_list.value.push(listItem)
+        }
+        upcomingDeadline.value.push(listItem.dueDate)
+    })
+    in_board.value = todo_list.value.length + in_progress.value.length + awaiting_feedback.value.length + done_list.value.length
+    oneWeekAway();
+})
 </script>
 
 <style lang="scss">
