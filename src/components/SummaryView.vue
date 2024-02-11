@@ -2,7 +2,7 @@
     <div
         class="container container-xl col-12 col-sm-9 d-flex flex-column justify-content-center align-items-center align-items-xl-between mb-6 mt-3 mt-lg-0 mx-xl-auto px-xl-0"
     >
-        <h1 class="mb-md-2 mb-lg-3 mb-xl-4">Grüßbert, <b>Guest</b></h1>
+        <h1 class="mb-md-2 mb-lg-3 mb-xl-4">Good afternoon, <b>Guest</b></h1>
 
         <!-- * First line Tillies on Summary -->
         <div
