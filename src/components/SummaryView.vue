@@ -126,7 +126,7 @@ const tilleList2 = reactive([
     }
 ])
 
-// TODO: don't forget to add Upcomming Deadline
+// Watch the changes in the lists and update the tiles
 const lists = [todo_list, in_board, in_progress, awaiting_feedback, done_list]
 const tiles = [tilleList1[0], ...tilleList2]
 
@@ -152,11 +152,8 @@ const oneWeekAway = () => {
     
 }
 
-// ! Firebase Communication
-// TODO: don't forget to add Upcomming Deadline
-/*
-get tasks from firebase
-*/
+
+// get tasks from firebase
 onMounted(async () => {
     const querySnapshot = await getDocs(collection(db, 'tasks'))
     querySnapshot.forEach((doc) => {
