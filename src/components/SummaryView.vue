@@ -23,7 +23,7 @@
                                 src="@/assets/icons/Urgent.webp"
                             />
                         </div>
-                        <span class="fs-1 ms-3"><b>0</b></span>
+                        <span class="fs-1 ms-3"><b>{{ urgentTasks }}</b></span>
                     </div>
                     <div class="fs-4 mt-3 text-hov text-center text-white">Task Urgent</div>
                 </div>
@@ -63,6 +63,8 @@ const currentDay = ref(
 )
 
 // Work on the Firebase Communication
+const upcomingDeadline = ref([])
+const urgentTasks = ref(0)
 const todo_list = ref([])
 const in_board = ref(0)
 const in_progress = ref([])
@@ -134,8 +136,20 @@ for (let i = 0; i < lists.length; i++) {
         (newLength) => {
             tiles[i].count = newLength
         }
-        
     )
+}
+
+// Check if the upcomingDeadline is one week away
+const oneWeekAway = () => {
+    const today = new Date()
+    const oneWeek = new Date(today)
+    oneWeek.setDate(oneWeek.getDate() + 7)
+    upcomingDeadline.value.forEach((date) => {
+        if (new Date(date) < oneWeek) {
+            urgentTasks.value++
+        }
+    })
+    
 }
 
 // ! Firebase Communication
@@ -149,7 +163,8 @@ onMounted(async () => {
         const listItem = {
             id: doc.id,
             title: doc.data().title,
-            column: doc.data().column
+            column: doc.data().column,
+            dueDate: doc.data().dueDate
         }
         if (listItem.column === 0) {
             todo_list.value.push(listItem)
@@ -160,13 +175,10 @@ onMounted(async () => {
         } else if (listItem.column === 3) {
             done_list.value.push(listItem)
         }
+        upcomingDeadline.value.push(listItem.dueDate)
     })
     in_board.value = todo_list.value.length + in_progress.value.length + awaiting_feedback.value.length + done_list.value.length
-    // console.log(todo_list.value.length)
-    // console.log(in_board.value)
-    // console.log(in_progress.value.length)
-    // console.log(awaiting_feedback.value.length)
-    // console.log(done_list.value.length)
+    oneWeekAway();
 })
 </script>
 
