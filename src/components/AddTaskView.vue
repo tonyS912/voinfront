@@ -14,6 +14,7 @@
                         class="form-control"
                         id="floatingTitle"
                         placeholder="Enter title ..."
+                        v-model="newTask.title"
                     />
                     <label for="floatingTitle" class="form-label">Task Title</label>
                     <span class="invalid-feedback"
@@ -29,6 +30,7 @@
                         id="taskDescription"
                         rows="5"
                         placeholder="Task Description (optional)"
+                        v-model="newTask.description"
                     ></textarea>
                     <label for="taskDescription" class="form-label"
                         >Task Description (optional)</label
@@ -38,7 +40,7 @@
                 <!-- * Third Input-Field: Thats the Due-Date of the new Task -->
                 <div class="mb-3">
                     <label for="taskDueDate" class="form-label">Due Date</label>
-                    <input type="date" class="form-control" id="taskDueDate" />
+                    <input type="date" class="form-control" id="taskDueDate" v-model="newTaskDueDate"/>
                 </div>
 
                 <!-- * Fourth Input-Field: Thats the Priority of the new Task -->
@@ -151,7 +153,7 @@
                         class="form-control"
                         id="taskTags"
                         v-model="newSubtask"
-                        @keyup.enter="addSubtask"
+                        @keyup.enter.prevent="addSubtask"
                     />
                 </div>
             </div>
@@ -164,9 +166,9 @@
                     Clear
                 </button>
                 <button
-                    :disabled="!formIsValid"
                     type="submit"
                     class="col-6 btn btn-primary text-white"
+                    @click.prevent="addTask"
                 >
                     Create Task
                 </button>
@@ -178,10 +180,21 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-import caretDownFill from '../assets/icons/caretDownFill.vue'
 import arrowUpIcon from '../assets/icons/arrowUpIcon.vue'
 import arrowRightIcon from '../assets/icons/arrowRightIcon.vue'
 import arrowDownIcon from '../assets/icons/arrowDownIcon.vue'
+
+// Create a new Task
+const newTask = reactive({
+    title: '',
+    description: '',
+    dueDate: '',
+    priority: '',
+    assignee: '',
+    category: '',
+    subtasks: []
+})
+
 
 /*
 Priority Buttons 
@@ -194,12 +207,15 @@ const setActive = (button) => {
     if (button === 'success') {
         isActiveSuccess.value = !isActiveSuccess.value
         isActiveWarning.value = isActiveDanger.value = false
+        newTask.priority = 'Success'
     } else if (button === 'warning') {
         isActiveWarning.value = !isActiveWarning.value
         isActiveSuccess.value = isActiveDanger.value = false
+        newTask.priority = 'Warning'
     } else if (button === 'danger') {
         isActiveDanger.value = !isActiveDanger.value
         isActiveSuccess.value = isActiveWarning.value = false
+        newTask.priority = 'Danger'
     }
 }
 
@@ -269,6 +285,7 @@ let stateCategory = ref('')
 
 const selectCategory = (category) => {
     stateCategory.value = category.category
+    newTask.category = category.category
 }
 
 /* 
@@ -284,14 +301,15 @@ const addSubtask = () => {
     }
     subtasks.value.push(subtask)
     newSubtask.value = ''
-    console.log(subtasks.value)
+    //console.log(subtasks.value)
+    newTask.subtasks = subtasks.value
 }
 
 /* 
 Add Task
 */
 const addTask = () => {
-    console.log('Add Task')
+    console.log(newTask)
 }
 </script>
 
